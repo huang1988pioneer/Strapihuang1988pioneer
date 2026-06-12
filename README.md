@@ -24,6 +24,7 @@ The backend tables are defined as Strapi collection types under `src/api`.
 - `article`
 - `bank`
 - `commonaccount`
+- `cron-strapi`
 - `commondocument`
 - `food`
 - `image`
@@ -39,6 +40,19 @@ The backend tables are defined as Strapi collection types under `src/api`.
 - `tool-price-history`
 
 The content type definitions are generated from `scripts/generate-content-types.mjs`.
+
+## CronStrapi Schedule
+
+`config/cron-tasks.ts` enables two Strapi cron jobs:
+
+- Odd hours at minute 11: create one `cron-strapi` record.
+- Even hours at minute 11: delete the latest cron-created `cron-strapi` record.
+
+The default cron timezone is `Asia/Taipei`. Override it with:
+
+```bash
+CRON_STRAPI_TIMEZONE=Asia/Taipei
+```
 
 ## Reference Projects
 

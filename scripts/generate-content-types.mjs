@@ -57,6 +57,27 @@ const contentTypes = [
     },
   },
   {
+    name: 'cron-strapi',
+    displayName: 'CronStrapi',
+    pluralName: 'cron-strapis',
+    collectionName: 'cron_strapis',
+    attributes: {
+      name: { type: 'string', required: true, maxLength: 100 },
+      action: {
+        type: 'enumeration',
+        enum: ['created-by-odd-hour-cron'],
+        default: 'created-by-odd-hour-cron',
+        required: true,
+      },
+      runAt: { type: 'datetime', required: true },
+      hour: { type: 'integer', required: true },
+      minute: { type: 'integer', required: true, default: 11 },
+      timezone: { type: 'string', required: true, default: 'Asia/Taipei', maxLength: 64 },
+      createdByCron: { type: 'boolean', required: true, default: true },
+      note: { type: 'text' },
+    },
+  },
+  {
     name: 'commondocument',
     displayName: 'Common Document',
     pluralName: 'commondocuments',

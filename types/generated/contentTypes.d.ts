@@ -952,6 +952,56 @@ export interface ApiCommondocumentCommondocument
   };
 }
 
+export interface ApiCronStrapiCronStrapi extends Struct.CollectionTypeSchema {
+  collectionName: 'cron_strapis';
+  info: {
+    displayName: 'CronStrapi';
+    pluralName: 'cron-strapis';
+    singularName: 'cron-strapi';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    action: Schema.Attribute.Enumeration<['created-by-odd-hour-cron']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'created-by-odd-hour-cron'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    createdByCron: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    hour: Schema.Attribute.Integer & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cron-strapi.cron-strapi'
+    > &
+      Schema.Attribute.Private;
+    minute: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<11>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    note: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    runAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    timezone: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 64;
+      }> &
+      Schema.Attribute.DefaultTo<'Asia/Taipei'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFoodFood extends Struct.CollectionTypeSchema {
   collectionName: 'foods';
   info: {
@@ -2055,6 +2105,7 @@ declare module '@strapi/strapi' {
       'api::bank.bank': ApiBankBank;
       'api::commonaccount.commonaccount': ApiCommonaccountCommonaccount;
       'api::commondocument.commondocument': ApiCommondocumentCommondocument;
+      'api::cron-strapi.cron-strapi': ApiCronStrapiCronStrapi;
       'api::food.food': ApiFoodFood;
       'api::image.image': ApiImageImage;
       'api::landtophistory.landtophistory': ApiLandtophistoryLandtophistory;
