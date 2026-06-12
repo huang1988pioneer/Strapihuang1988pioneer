@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscriptions",
+  "info": {
+    "singularName": "subscription",
+    "pluralName": "subscriptions",
+    "displayName": "Subscription"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "site": {
+      "type": "text"
+    },
+    "account": {
+      "type": "text"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "nextdate": {
+      "type": "date"
+    },
+    "note": {
+      "type": "text"
+    },
+    "iscontinue": {
+      "type": "boolean",
+      "default": true
+    },
+    "currency": {
+      "type": "string",
+      "default": "TWD"
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "purpose": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "usageFrequency": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "friendliness": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "alternative": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "retentionRecommendation": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

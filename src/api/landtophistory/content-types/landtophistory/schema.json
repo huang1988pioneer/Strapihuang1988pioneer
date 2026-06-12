@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "landtophistories",
+  "info": {
+    "singularName": "landtophistory",
+    "pluralName": "landtophistories",
+    "displayName": "Landtop History"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "source": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20
+    },
+    "snapshotKey": {
+      "type": "string",
+      "required": true,
+      "maxLength": 220
+    },
+    "productId": {
+      "type": "string",
+      "required": true,
+      "maxLength": 180
+    },
+    "brand": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "sourceUrl": {
+      "type": "text"
+    },
+    "landtopPrice": {
+      "type": "integer"
+    },
+    "suggestedPrice": {
+      "type": "integer"
+    },
+    "snapshotDate": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}

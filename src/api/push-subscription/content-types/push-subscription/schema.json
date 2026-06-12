@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "push_subscriptions",
+  "info": {
+    "singularName": "push-subscription",
+    "pluralName": "push-subscriptions",
+    "displayName": "Push Subscription"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "endpoint": {
+      "type": "text",
+      "required": true,
+      "unique": true
+    },
+    "auth": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "p256dh": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500
+    }
+  }
+}

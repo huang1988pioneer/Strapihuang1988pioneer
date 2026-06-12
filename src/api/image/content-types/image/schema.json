@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "images",
+  "info": {
+    "singularName": "image",
+    "pluralName": "images",
+    "displayName": "Image"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false,
+      "maxLength": 100
+    },
+    "file": {
+      "type": "text"
+    },
+    "filetype": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "note": {
+      "type": "text"
+    },
+    "ref": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "hash": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "cover": {
+      "type": "text"
+    }
+  }
+}

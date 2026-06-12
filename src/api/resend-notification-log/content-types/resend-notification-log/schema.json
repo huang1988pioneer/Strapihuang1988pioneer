@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resend_notification_logs",
+  "info": {
+    "singularName": "resend-notification-log",
+    "pluralName": "resend-notification-logs",
+    "displayName": "Resend Notification Log"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "eventKey": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 191
+    },
+    "eventType": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "tableName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "recordId": {
+      "type": "string",
+      "required": true,
+      "maxLength": 64
+    },
+    "targetDate": {
+      "type": "date",
+      "required": true
+    },
+    "recipientEmail": {
+      "type": "email",
+      "required": true,
+      "maxLength": 191
+    },
+    "sentAt": {
+      "type": "datetime"
+    }
+  }
+}

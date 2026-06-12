@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Article"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "content": {
+      "type": "text"
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "ref": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "newdate": {
+      "type": "datetime"
+    },
+    "url1": {
+      "type": "text"
+    },
+    "url2": {
+      "type": "text"
+    },
+    "url3": {
+      "type": "text"
+    },
+    "file1": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "file1name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "file1type": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "file2": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "file2name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "file2type": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "file3": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "file3name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "file3type": {
+      "type": "string",
+      "maxLength": 20
+    }
+  }
+}

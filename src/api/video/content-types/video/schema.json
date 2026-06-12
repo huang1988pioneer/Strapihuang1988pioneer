@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos",
+  "info": {
+    "singularName": "video",
+    "pluralName": "videos",
+    "displayName": "Video"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 100
+    },
+    "file": {
+      "type": "text"
+    },
+    "filetype": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "note": {
+      "type": "text"
+    },
+    "ref": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "hash": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "cover": {
+      "type": "text"
+    },
+    "fileSize": {
+      "type": "integer"
+    }
+  }
+}

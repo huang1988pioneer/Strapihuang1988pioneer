@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "foods",
+  "info": {
+    "singularName": "food",
+    "pluralName": "foods",
+    "displayName": "Food"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "amount": {
+      "type": "integer",
+      "default": 0
+    },
+    "price": {
+      "type": "integer",
+      "default": 0
+    },
+    "shop": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "todate": {
+      "type": "date"
+    },
+    "photo": {
+      "type": "text"
+    },
+    "photohash": {
+      "type": "string",
+      "maxLength": 256
+    }
+  }
+}

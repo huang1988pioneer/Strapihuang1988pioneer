@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tool_price_histories",
+  "info": {
+    "singularName": "tool-price-history",
+    "pluralName": "tool-price-histories",
+    "displayName": "Tool Price History"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "toolType": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30
+    },
+    "queryText": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "source": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "currentPrice": {
+      "type": "integer"
+    },
+    "highPrice": {
+      "type": "integer"
+    },
+    "lowPrice": {
+      "type": "integer"
+    },
+    "resultUrl": {
+      "type": "text"
+    },
+    "notice": {
+      "type": "text"
+    }
+  }
+}
