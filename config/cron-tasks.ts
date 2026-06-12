@@ -1,13 +1,19 @@
+import type { Core } from '@strapi/strapi';
+
 const CRON_STRAPI_UID = 'api::cron-strapi.cron-strapi';
 const DEFAULT_TIMEZONE = 'Asia/Taipei';
+const CRON_MINUTE = 11;
+const ODD_HOUR_RULE = `0 ${CRON_MINUTE} 1-23/2 * * *`;
+const EVEN_HOUR_RULE = `0 ${CRON_MINUTE} 0-22/2 * * *`;
+const CRON_CREATED_ACTION = 'created-by-odd-hour-cron';
 
 type CronContext = {
-  strapi: any;
+  strapi: Core.Strapi;
 };
 
 const getTimezone = () => process.env.CRON_STRAPI_TIMEZONE || DEFAULT_TIMEZONE;
 
-const getTaipeiParts = (date = new Date(), timezone = getTimezone()) => {
+const getClockParts = (date = new Date(), timezone = getTimezone()) => {
   const parts = new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
@@ -21,22 +27,27 @@ const getTaipeiParts = (date = new Date(), timezone = getTimezone()) => {
   };
 };
 
+const cronStrapiRecordData = (runAt = new Date()) => {
+  const timezone = getTimezone();
+  const { hour, minute } = getClockParts(runAt, timezone);
+
+  return {
+    name: `CronStrapi ${runAt.toISOString()}`,
+    action: CRON_CREATED_ACTION,
+    runAt,
+    hour,
+    minute,
+    timezone,
+    createdByCron: true,
+    note: 'Created automatically at minute 11 of an odd hour.',
+  };
+};
+
 const createCronStrapiRecord = async ({ strapi }: CronContext) => {
   const now = new Date();
-  const timezone = getTimezone();
-  const { hour, minute } = getTaipeiParts(now, timezone);
 
   await strapi.db.query(CRON_STRAPI_UID).create({
-    data: {
-      name: `CronStrapi ${now.toISOString()}`,
-      action: 'created-by-odd-hour-cron',
-      runAt: now,
-      hour,
-      minute,
-      timezone,
-      createdByCron: true,
-      note: 'Created automatically at minute 11 of an odd hour.',
-    },
+    data: cronStrapiRecordData(now),
   });
 
   strapi.log.info(`[CronStrapi] Created one record at ${now.toISOString()}`);
@@ -70,14 +81,14 @@ export default {
   createCronStrapiRecordOnOddHour: {
     task: createCronStrapiRecord,
     options: {
-      rule: '0 11 1-23/2 * * *',
+      rule: ODD_HOUR_RULE,
       tz: getTimezone(),
     },
   },
   deleteLatestCronStrapiRecordOnEvenHour: {
     task: deleteLatestCronStrapiRecord,
     options: {
-      rule: '0 11 0-22/2 * * *',
+      rule: EVEN_HOUR_RULE,
       tz: getTimezone(),
     },
   },

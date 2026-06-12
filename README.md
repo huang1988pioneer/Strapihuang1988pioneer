@@ -41,6 +41,11 @@ The backend tables are defined as Strapi collection types under `src/api`.
 
 The content type definitions are generated from `scripts/generate-content-types.mjs`.
 
+```bash
+npm run generate:content-types
+npm run typegen
+```
+
 ## CronStrapi Schedule
 
 `config/cron-tasks.ts` enables two Strapi cron jobs:

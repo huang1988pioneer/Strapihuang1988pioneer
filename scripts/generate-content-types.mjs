@@ -1,6 +1,9 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
+const API_ROOT = join('src', 'api');
+const CORE_LAYERS = ['controllers', 'routes', 'services'];
+
 const contentTypes = [
   {
     name: 'article',
@@ -284,27 +287,50 @@ function schemaFor(contentType) {
   };
 }
 
-for (const contentType of contentTypes) {
-  const base = join('src', 'api', contentType.name);
+function contentTypeBasePath(contentType) {
+  return join(API_ROOT, contentType.name);
+}
+
+function contentTypeUid(contentType) {
+  return `api::${contentType.name}.${contentType.name}`;
+}
+
+function coreFactorySource(contentType, layer) {
+  const factoryByLayer = {
+    controllers: 'createCoreController',
+    routes: 'createCoreRouter',
+    services: 'createCoreService',
+  };
+
+  return `import { factories } from '@strapi/strapi';\n\nexport default factories.${factoryByLayer[layer]}('${contentTypeUid(contentType)}');\n`;
+}
+
+async function ensureContentTypeFolders(base) {
+  await mkdir(join(base, 'content-types'), { recursive: true });
+
+  for (const layer of CORE_LAYERS) {
+    await mkdir(join(base, layer), { recursive: true });
+  }
+}
+
+async function writeContentType(contentType) {
+  const base = contentTypeBasePath(contentType);
+  await ensureContentTypeFolders(base);
   await mkdir(join(base, 'content-types', contentType.name), { recursive: true });
-  await mkdir(join(base, 'controllers'), { recursive: true });
-  await mkdir(join(base, 'routes'), { recursive: true });
-  await mkdir(join(base, 'services'), { recursive: true });
 
   await writeFile(
     join(base, 'content-types', contentType.name, 'schema.json'),
     `${JSON.stringify(schemaFor(contentType), null, 2)}\n`,
   );
-  await writeFile(
-    join(base, 'controllers', `${contentType.name}.ts`),
-    `import { factories } from '@strapi/strapi';\n\nexport default factories.createCoreController('api::${contentType.name}.${contentType.name}');\n`,
-  );
-  await writeFile(
-    join(base, 'routes', `${contentType.name}.ts`),
-    `import { factories } from '@strapi/strapi';\n\nexport default factories.createCoreRouter('api::${contentType.name}.${contentType.name}');\n`,
-  );
-  await writeFile(
-    join(base, 'services', `${contentType.name}.ts`),
-    `import { factories } from '@strapi/strapi';\n\nexport default factories.createCoreService('api::${contentType.name}.${contentType.name}');\n`,
-  );
+
+  for (const layer of CORE_LAYERS) {
+    await writeFile(
+      join(base, layer, `${contentType.name}.ts`),
+      coreFactorySource(contentType, layer),
+    );
+  }
+}
+
+for (const contentType of contentTypes) {
+  await writeContentType(contentType);
 }
